@@ -1,0 +1,354 @@
+*{
+  margin: 0;
+  user-select: none;
+}
+:root{
+  /* background-color: rgb(160, 11, 11); */
+  /* background-color: #192229; */
+  background-color: #0f0f0f;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  --color-parrafo:#CDDDE9;
+  --color-text-primary:#CDDDE9;
+  --color-text-blue:#3ea6ff;
+  --color-oficial-blue:#1473E6;
+
+  --color-title:#3ea6ff;
+  --color-background-primary:#0f0f0f;
+  --color-background-secondary:#212121;
+  /* background: var(--color-background-secondary); */
+
+
+
+}
+body { 
+  color: var(--color-parrafo);
+  display: flex;
+  flex-direction: column;
+}
+/* Contenedor del menu */
+.menu_header{
+  margin: auto;
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+}
+.salir_icon_content{
+  width: 10%;
+  height: 100%;
+  display: flex;
+}
+.icon_salir{
+  margin: auto;
+  cursor: pointer;
+}
+.barra{
+  width: 15%;
+  height: 100%;
+  /* background-color: rgb(106, 47, 47); */
+  flex-grow: 1;
+  display: flex;
+}
+.progress-bar {
+  margin: auto;
+  width: 100%;
+  height: 10px;
+  background-color: var(--color-background-secondary);
+  border-radius: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: rgba(17, 146, 238,.5);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+.vida{
+  width: 20%;
+  height: 100%;
+  /* background-color: rgb(59, 49, 171); */
+  display: flex;
+}
+.corazon{
+  margin: auto;
+}
+.corazon_number{
+  margin: auto auto auto -15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Contenido cuando se hace click en boton salir */
+.salir_content{
+  box-sizing: border-box;
+  background: var(--color-background-secondary);
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 200px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn_abandonar, .btn_continuar{
+  cursor: pointer;
+  margin: auto;
+  background-color: var(--color-oficial-blue);
+  width: 200px;
+  height: 30px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 500;
+  border: none;
+}
+.btn_continuar{
+  background-color: rgba(17, 146, 238,.1);
+}
+
+
+.main{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.main_block{
+  width: 100%;
+  height: 100px;
+  /* ESTE DE AQUI NOS AYUDA ORGANIZAR EL LAYOUT********************* */
+  /* border: solid 1px rgb(249, 249, 249); */
+}
+.objetivo{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  color: var(--color-parrafo);
+}
+p{
+  margin: auto;
+  font-size: 16px;
+}
+.tarea{
+  height: 50px;
+  display: flex;
+
+}
+.title{
+  margin: auto;
+  font-size: 20px;
+  color: var(--color-text-blue);
+  cursor: pointer;
+
+}
+/* ESTE ESPACIO NO CONTIENE NADA ES DONDE ANTERIORMENTE ESTABA LOS ALTAVOCES */
+.help_traduction{
+  text-align: center;
+  height: 40px;
+  /* background-color: yellow; */
+}
+/* este es el icono del volumen */
+.volumen, .volumenLento{
+  cursor: pointer;
+  width: 35px;
+}
+.volumen:active, .volumenLento:active{
+  transform: scale(1.1);
+  
+}
+.volumen{
+  margin: auto -60px auto auto;
+  
+}
+.volumenLento{
+  margin: auto auto auto -60px;
+  width: 35px;
+}
+.image_leccion{
+  width: 100px;
+  /* background-color: rgb(186, 214, 24); */
+  margin: auto -10px auto auto;
+}
+
+.prompt_text{
+  display: flex;
+  /* margin: auto; */
+  /* background-color: blue; */
+
+
+}
+#bol {
+  width: 60%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-title);
+  background: transparent;
+  border: none;
+  resize: none;
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 1px var(--color-title) solid;
+  margin: auto auto auto -10px;
+}
+#bol::placeholder{
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+#bol:focus{
+outline: var(--color-parrafo) dotted .01px;
+/* outline: none; */
+
+}
+
+.prompt_voz{
+  display: flex;
+  height: 50px;
+  /* background-color: brown; */
+}
+.output_error{
+  display: flex;
+  height: 50px;
+  color: rgb(167, 226, 64);
+  /* background-color: rgb(42, 58, 165); */
+}
+.microfonito{
+  display: flex;
+}
+
+.microfono_animation{
+  cursor: pointer;
+  margin: auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid var(--color-text-blue);
+  display: flex;
+  animation:micro .3s alternate infinite paused ;
+
+}
+
+.logo{
+cursor: pointer;
+margin: auto;
+width: 53px;
+}
+@keyframes micro{
+0%{
+  box-shadow: 0px 0px 0px 1px var(--color-background-secondary);
+}
+50%{
+  box-shadow: 0px 0px 0px 5px var(--color-background-secondary);
+}
+100%{
+  box-shadow: 0px 0px 0px 10px var(--color-background-secondary);
+}
+}
+
+
+
+.contentBoton_continuar{
+  position: absolute;
+  background-color: var(--color-background-secondary);
+  width: 100%;
+  height: 200px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+
+}
+.error, .solutions{
+  width: 100%;
+  height: fit-content;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 0px 5px 0px;
+}
+.error{
+  color: #c098e6;
+font-family:'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+
+}
+.solutions{
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-parrafo);
+}
+.contentBoton_verificar{
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  
+}
+.btn_verificar, .btn_continuar_prompt{
+  border: none;
+  border-radius: 20px;
+  background-color: var(--color-oficial-blue);
+  
+
+  width: 80%;
+  height: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: auto auto 30px auto;
+  color: white;
+  cursor: pointer;
+
+}
+
+/* ESTE ESTILO SE APLICA CUANDO EL USUARIO ACBA ELA LECCION */
+.finish_container{
+  width: 100%;
+  height: 85%;
+  position: fixed;
+  top: 0;
+  background-color:var(--color-background-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 90px;
+}
+.anuncio{
+  width: 80%;
+  height: 70%;
+  border: solid 1px white;
+}
+.anuncio > img{
+  width: 100%;
+  height: 100%;
+}
+.logro{
+  margin-top: 10px;
+  width: 80%;
+  height: 20%;
+  border: 1px solid white;
+}
+
+.inactive{
+  display: none;
+}
+
+@media screen and (min-width:750px) {
+  .menu_header, .main{
+    width: 60%;
+  }
+  .menu_header{
+    margin-top: 30px;
+  }
+  .btn_verificar, .btn_continuar_prompt{
+    width: 50%;
+  }
+
+
+
+  
+}
+
