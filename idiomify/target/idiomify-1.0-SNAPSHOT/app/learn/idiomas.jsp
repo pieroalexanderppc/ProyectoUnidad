@@ -1,9 +1,10 @@
+<%@page import="org.apache.commons.text.StringEscapeUtils"%>
 <%@page import="java.util.List"%>
 
 <%@ page import="Modelo.ClsModeloIdioma" %>
 <%@ page import="ModeloDAO.ClsModeloDaoIdioma" %>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Idiomas</title>
@@ -53,10 +54,10 @@
             %>
             <div class="card">
                 <a href="CursoServlet?accion=listarCursos&idIdioma=<%= idioma.getIdIdioma()%>&vista=si">
-                    <img src="<%= idioma.getUrlBanner() %>" class="card-img-top" alt="Banner">
+                    <img src="<%= StringEscapeUtils.escapeHtml4(idioma.getUrlBanner()) %>" class="card-img-top" alt="Banner">
                     <div class="card-body">
-                        <h5 class="card-title"><%= idioma.getNombre() %></h5>
-                        <p class="card-text"><%= idioma.getDescripcion() %></p>
+                        <h5 class="card-title"><%= StringEscapeUtils.escapeHtml4(idioma.getNombre()) %></h5>
+                        <p class="card-text"><%= StringEscapeUtils.escapeHtml4(idioma.getDescripcion()) %></p>
                     </div>
                 </a>
             </div>

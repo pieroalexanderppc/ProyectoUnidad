@@ -4,6 +4,7 @@
     Author     : LENOVO
 --%>
 
+
 <%@page import="Modelo.ClsModeloAdministrador"%>
 <%-- 
     Document: listarCursos
@@ -13,6 +14,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Modelo.ClsModeloCurso"%>
 <%@page import="ModeloDAO.ClsModeloDaoCurso"%>
+<%@ page import="org.apache.commons.text.StringEscapeUtils" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -57,7 +59,7 @@
      
     <div class="container mt-5" id="top">
         <h2 class="text-center">Todo los Cursos</h2>
-         <div class="d-flex justify-content-end align-items-center mb-3">
+         
              
              
                      <%
@@ -70,10 +72,11 @@
                 <i class="bi bi-plus"></i> Nuevo
 <% } %>
             </a>
-           <a href="/idiomify/CursoServlet?accion=exportarPdf&idIdioma=<%= idIdiomaStr%>" class="btn btn-primary me-2">
+           <a href="/idiomify/CursoServlet?accion=exportarPdf&idIdioma=<%= StringEscapeUtils.escapeHtml4(idIdiomaStr)%>" class="btn btn-primary me-2">
                 PDF <i class="fa-solid fa-download"></i>
             </a>
-            <a href="/idiomify/CursoServlet?accion=exportarCsv&idIdioma=<%= idIdiomaStr%>" class="btn btn-primary me-2">
+              <% String hiddenIdIdioma = StringEscapeUtils.escapeHtml4(idIdiomaStr); %>
+            <a href="/idiomify/CursoServlet?accion=exportarCsv&idIdioma=<%= StringEscapeUtils.escapeHtml4(hiddenIdIdioma)%>" class="btn btn-primary me-2">
                CSV<i class="fa-solid fa-download"></i>
             </a>
                
@@ -89,7 +92,7 @@
                 </div>
             </form>
 <% } %>
-              </div>
+              
            <div class="table-responsive">
             <table class="table table-sm table-dark" id="myTable">
 
@@ -112,12 +115,13 @@
                     List<ClsModeloCurso> cursos = dao.listarCursosPorIdIdioma(idIdioma);
                     for (ClsModeloCurso curso : cursos) { %>
                     <tr>
-                        <td><%= curso.getIdCurso() %></td>
+                        
+                        <td><%= StringEscapeUtils.escapeHtml4(curso.getIdCurso()) %></td>
                         <td><%= curso.getFKidIdioma() %></td>
-                        <td><%= curso.getNombre() %></td>
-                        <td><%= curso.getDescripcion() %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(curso.getNombre()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(curso.getDescripcion()) %></td>
                         <td>
-                            <img src="<%= curso.getUrlBanner() %>" alt="Banner" width="100" >
+                            <img src="<%= StringEscapeUtils.escapeHtml4(curso.getUrlBanner()) %>" alt="Banner" width="100" >
                         </td>
                         <td>
                             <div class="acciones-icons">
@@ -125,12 +129,12 @@
                          <% if (adminAutenticadope != null && !adminAutenticadope.getRol().equalsIgnoreCase("Lectura")) { %>
 
   
-                                <a href="/idiomify/CursoServlet?accion=editarCursos&idCurso=<%= curso.getIdCurso()%>" class="btn btn-warning">
+                                <a href="/idiomify/CursoServlet?accion=editarCursos&idCurso=<%= StringEscapeUtils.escapeHtml4(curso.getIdCurso())%>" class="btn btn-warning">
                                    <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                 </a>
 <% } %>
 
-                                <a href="/idiomify/LeccionServlet?accion=listarLecciones&idCurso=<%= curso.getIdCurso()%>&ruta=admin" class="btn btn-info">
+                                <a href="/idiomify/LeccionServlet?accion=listarLecciones&idCurso=<%= StringEscapeUtils.escapeHtml4(curso.getIdCurso())%>&ruta=admin" class="btn btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
                             </div>

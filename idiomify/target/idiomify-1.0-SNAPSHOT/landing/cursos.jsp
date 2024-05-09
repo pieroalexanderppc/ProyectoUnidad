@@ -52,53 +52,38 @@
           <h2 class="h2 section-title text_negrita">Elija un Curso para iniciar</h2>
 
           <ul class="grid-list">
-                                          <%
-                String idIdiomaStr = request.getParameter("idIdioma");
-                int idIdioma = Integer.parseInt(idIdiomaStr);
-                ClsModeloDaoCurso dao = new ClsModeloDaoCurso();
-                List<ClsModeloCurso> cursos = dao.listarCursosPorIdIdioma(idIdioma);
-                for (ClsModeloCurso curso : cursos) {
+            <% 
+            String idIdiomaStr = request.getParameter("idIdioma");
+            int idIdioma = Integer.parseInt(idIdiomaStr);
+            ClsModeloDaoCurso dao = new ClsModeloDaoCurso();
+            List<ClsModeloCurso> cursos = dao.listarCursosPorIdIdioma(idIdioma);
+            for (ClsModeloCurso curso : cursos) {
             %>
-
             <li>
-
-              <div class="course-card">
-
-                <figure class="card-banner img-holder" style="--width: 370; --height: 220;">
-                  <img src="<%= curso.getUrlBanner() %>" width="370" height="220" loading="lazy"
-                    alt="Build Responsive Real- World Websites with HTML and CSS" class="img-cover">
-                </figure>
-
-                <div class="abs-badge">
-                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                  
+                <div class="course-card">
+                    <figure class="card-banner img-holder" style="--width: 370; --height: 220;">
+                        <img src="<%= sanitize(curso.getUrlBanner()) %>" width="370" height="220" loading="lazy"
+                            alt="Build Responsive Real- World Websites with HTML and CSS" class="img-cover">
+                    </figure>
+                    <div class="abs-badge">
+                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                    </div>
+                    <div class="card-content">
+                        <span class="badge">Basico</span>
+                        <h3 class="h3">
+                            <a href="#" class="card-title"><%= sanitize(curso.getNombre()) %></a>
+                        </h3>
+                        <div class="wrapper">
+                            
+                        </div>
+                    </div>
                 </div>
-
-                <div class="card-content">
-
-                  <span class="badge">Basico</span>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title"><%= curso.getNombre() %></a>
-                  </h3>
-
-                  <div class="wrapper">
-
-   
-         
-
-                </div>
-
-              </div>
-
             </li>
-                          <%
-                }
+            <% 
+            } 
             %>
-
-
-          </ul>
+        </ul>
+        
 
           <a href="#" class="btn has-before">
             <span class="span">Iniciar Gratis</span>
@@ -113,3 +98,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+<%! 
+    public static String sanitize(String input) {
+        if (input == null) {
+            return null;
+        }
+        StringBuilder sanitized = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            switch (c) {
+                case '<':
+                    sanitized.append("&lt;");
+                    break;
+                case '>':
+                    sanitized.append("&gt;");
+                    break;
+                case '"':
+                    sanitized.append("&quot;");
+                    break;
+                case '\'':
+                    sanitized.append("&#39;");
+                    break;
+                case '&':
+                    sanitized.append("&amp;");
+                    break;
+                default:
+                    sanitized.append(c);
+                    break;
+            }
+        }
+        return sanitized.toString();
+    }
+%>

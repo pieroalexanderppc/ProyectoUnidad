@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Modelo.ClsModeloLeccion"%>
 <%@page import="ModeloDAO.ClsModeloDaoLeccion"%>
+<%@ page import="org.apache.commons.text.StringEscapeUtils" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -96,12 +97,12 @@
                     List<ClsModeloLeccion> lecciones = dao.listarLeccionesPorCurso(idCursoStr);
                     for (ClsModeloLeccion leccion : lecciones) { %>
                     <tr>
-                        <td><%= leccion.getIdLeccion() %></td>
-                        <td><%= leccion.getFKidCurso() %></td>
-                        <td><%= leccion.getFKidIdioma() %></td>
-                        <td><%= leccion.getTitulo() %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getIdLeccion()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getFKidCurso()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getFKidIdioma()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getTitulo()) %></td>
                         <td>
-                            <img src="<%= leccion.getUrlBanner() %>" alt="Banner" width="60" >
+                            <img src="<%= StringEscapeUtils.escapeHtml4(leccion.getUrlBanner()) %>" alt="Banner" width="60" >
                         </td>
                         <td>
                             <div class="acciones-icons">
@@ -109,12 +110,12 @@
 <% if (adminAutenticadope != null && !adminAutenticadope.getRol().equalsIgnoreCase("Lectura")) { %>
 
 
-                                <a href="/idiomify/LeccionServlet?accion=editarLecciones&idLeccion=<%= leccion.getIdLeccion() %>" class="btn btn-warning">
+                                <a href="/idiomify/LeccionServlet?accion=editarLecciones&idLeccion=<%=  StringEscapeUtils.escapeHtml4(leccion.getIdLeccion()) %>" class="btn btn-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
 <% } %>
   
-                                <a href="/idiomify/PreguntaServlet?accion=listarPreguntas&idLeccion=<%= leccion.getIdLeccion() %>" class="btn btn-info">
+                                <a href="/idiomify/PreguntaServlet?accion=listarPreguntas&idLeccion=<%=  StringEscapeUtils.escapeHtml4(leccion.getIdLeccion()) %>" class="btn btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
                             </div>

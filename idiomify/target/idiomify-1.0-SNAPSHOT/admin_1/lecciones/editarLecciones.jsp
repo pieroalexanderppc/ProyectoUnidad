@@ -7,6 +7,7 @@ Author     : LENOVO
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="Modelo.ClsModeloLeccion" %>
 <%@ page import="ModeloDAO.ClsModeloDaoLeccion" %>
+<%@page import="org.apache.commons.text.StringEscapeUtils"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,9 +43,9 @@ Author     : LENOVO
 
                             if (leccion != null) { %>
                                 <form method="post" action="/idiomify/LeccionServlet?accion=actualizarLeccion">
-                                    <input type="hidden" name="idLeccion" value="<%= leccion.getIdLeccion() %>">
-                                    <input type="hidden" name="FKidCurso" value="<%= leccion.getFKidCurso() %>">
-                                    <input type="hidden" name="FKidIdioma" value="<%= leccion.getFKidIdioma() %>">
+                                    <input type="hidden" name="idLeccion" value="<%= StringEscapeUtils.escapeHtml4(leccion.getIdLeccion()) %>">
+                                    <input type="hidden" name="FKidCurso" value="<%= StringEscapeUtils.escapeHtml4(leccion.getFKidCurso()) %>">
+                                    <input type="hidden" name="FKidIdioma" value="<%= StringEscapeUtils.escapeHtml4(leccion.getFKidIdioma()) %>">
                                     <div class="mb-3">
                                         <label for="titulo" class="form-label">
                                             <i class="bi bi-file-earmark-text"></i> Título:

@@ -9,7 +9,7 @@
 <%@page import="ModeloDAO.ClsModeloDaoLeccion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Lecciones</title>
@@ -37,12 +37,15 @@
                 ClsModeloDaoLeccion dao = new ClsModeloDaoLeccion();
                 List<ClsModeloLeccion> lecciones = dao.listarLeccionesPorCurso(idCursoStr);
                 for (ClsModeloLeccion leccion : lecciones) {
+                    String idLeccion = leccion.getIdLeccion();
+                    String titulo = sanitize(leccion.getTitulo());
+                    String urlBanner = sanitize(leccion.getUrlBanner());
             %>
             <div class="card">
-                <a href="PreguntaServlet?accion=listarPreguntas&idLeccion=<%= leccion.getIdLeccion() %>&ruta=app">
-                    <img src="<%= leccion.getUrlBanner() %>" class="card-img-top" alt="Banner">
+                <a href="PreguntaServlet?accion=listarPreguntas&idLeccion=<%= idLeccion %>&ruta=app">
+                    <img src="<%= urlBanner %>" class="card-img-top" alt="Banner">
                     <div class="card-body">
-                        <h5 class="card-title"><%= leccion.getTitulo() %></h5>
+                        <h5 class="card-title"><%= titulo %></h5>
                     </div>
                 </a>
             </div>
@@ -54,3 +57,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<%! 
+    public static String sanitize(String input) {
+        if (input == null) {
+            return null;
+        }
+        StringBuilder sanitized = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            switch (c) {
+                case '<':
+                    sanitized.append("&lt;");
+                    break;
+                case '>':
+                    sanitized.append("&gt;");
+                    break;
+                case '"':
+                    sanitized.append("&quot;");
+                    break;
+                case '\'':
+                    sanitized.append("&#39;");
+                    break;
+                case '&':
+                    sanitized.append("&amp;");
+                    break;
+                default:
+                    sanitized.append(c);
+                    break;
+            }
+        }
+        return sanitized.toString();
+    }
+%>

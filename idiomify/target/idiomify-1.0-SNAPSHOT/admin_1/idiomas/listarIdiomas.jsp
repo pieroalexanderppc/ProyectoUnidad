@@ -74,28 +74,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% ClsModeloDaoIdioma dao = new ClsModeloDaoIdioma();
-                       List<ClsModeloIdioma> idiomas = dao.obtenerTodosIdiomas();
-                       for (ClsModeloIdioma idioma : idiomas) { %>
-                       <tr>
-                           <td><%= idioma.getIdIdioma() %></td>
-                           <td><%= idioma.getNombre() %></td>
-                           <td><%= idioma.getDescripcion() %></td>
-                           <td>
-                               <img src="<%= idioma.getUrlBanner() %>" alt="Banner" width="100">
-                           </td>
-                           <td>
-                               <div class="acciones-icons">
-                                   <a href="/idiomify/IdiomaServlet?accion=editarIdiomas&idIdioma=<%= idioma.getIdIdioma()%>" class="btn btn-primary">
-                                      <i class="fa-regular fa-pen-to-square"></i>
-                                   </a>
-                                   <a href="/idiomify/CursoServlet?accion=listarCursos&idIdioma=<%= idioma.getIdIdioma()%>" class="btn btn-success">
-                                       <i class="bi bi-eye"></i>
-                                   </a>
-                               </div>
-                           </td>
-                       </tr>
-                    <% } %>
+                    <%
+                        ClsModeloDaoIdioma dao = new ClsModeloDaoIdioma();
+                        List<ClsModeloIdioma> idiomas = dao.obtenerTodosIdiomas();
+                        for (ClsModeloIdioma idioma : idiomas) {
+                            int idIdioma = idioma.getIdIdioma();
+                            String nombre = sanitize(idioma.getNombre());
+                            String descripcion = sanitize(idioma.getDescripcion());
+                            String urlBanner = sanitize(idioma.getUrlBanner());
+                        %>
+                        <tr>
+                            <td><%= idIdioma %></td>
+                            <td><%= nombre %></td>
+                            <td><%= descripcion %></td>
+                            <td>
+                                <img src="<%= urlBanner %>" alt="Banner" width="100">
+                            </td>
+                            <td>
+                                <div class="acciones-icons">
+                                    <a href="/idiomify/IdiomaServlet?accion=editarIdiomas&idIdioma=<%= idIdioma %>" class="btn btn-primary">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="/idiomify/CursoServlet?accion=listarCursos&idIdioma=<%= idIdioma %>" class="btn btn-success">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <%
+                        }
+                    %>
                 </tbody>
             </table>
         </div>
@@ -128,3 +136,36 @@
     </script>
 </body>
 </html>
+
+
+<%! 
+    public static String sanitize(String input) {
+        if (input == null) {
+            return null;
+        }
+        StringBuilder sanitized = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            switch (c) {
+                case '<':
+                    sanitized.append("&lt;");
+                    break;
+                case '>':
+                    sanitized.append("&gt;");
+                    break;
+                case '"':
+                    sanitized.append("&quot;");
+                    break;
+                case '\'':
+                    sanitized.append("&#39;");
+                    break;
+                case '&':
+                    sanitized.append("&amp;");
+                    break;
+                default:
+                    sanitized.append(c);
+                    break;
+            }
+        }
+        return sanitized.toString();
+    }
+%>

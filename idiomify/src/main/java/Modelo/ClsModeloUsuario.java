@@ -1,6 +1,6 @@
 package Modelo;
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 public class ClsModeloUsuario {
     private int idUsuario;

@@ -11,7 +11,7 @@
 <%@ page import="Modelo.ClsModeloUsuario" %>
 <%@ page import="ModeloDAO.ClsModeloDaoUsuario" %>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Administradores</title>

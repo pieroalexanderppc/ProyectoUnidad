@@ -2,8 +2,9 @@
 <%@page import="Modelo.ClsModeloCurso"%>
 <%@page import="ModeloDAO.ClsModeloDaoCurso"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.commons.text.StringEscapeUtils" %>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Cursos</title>
@@ -45,11 +46,11 @@
             %>
             <div class="col-md-4">
                 <div class="card dark-mode">
-                    <a href="LeccionServlet?accion=listarLecciones&idCurso=<%= curso.getIdCurso()%>&ruta=app">
-                        <img src="<%= curso.getUrlBanner() %>" class="card-img-top" alt="Banner">
+                    <a href="LeccionServlet?accion=listarLecciones&idCurso=<%= StringEscapeUtils.escapeHtml4(curso.getIdCurso())%>&ruta=app">
+                        <img src="<%= StringEscapeUtils.escapeHtml4(curso.getUrlBanner()) %>" class="card-img-top" alt="Banner">
                         <div class="card-body">
-                            <h5 class="card-title"><%= curso.getNombre() %></h5>
-                            <p class="card-text"><%= curso.getDescripcion() %></p>
+                            <h5 class="card-title"><%= StringEscapeUtils.escapeHtml4(curso.getNombre()) %></h5>
+                            <p class="card-text"><%= StringEscapeUtils.escapeHtml4(curso.getDescripcion()) %></p>
                         </div>
                     </a>
                 </div>

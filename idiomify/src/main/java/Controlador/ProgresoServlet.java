@@ -22,6 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ProgresoServlet", urlPatterns = {"/ProgresoServlet"})
 public class ProgresoServlet extends HttpServlet {
 
+    public static final String ERROR ="error.jsp";
+    
+    public static final String FK_idUsuario = "FKidUsuario";
+    public static final String FK_idLeccion = "FKidLeccion";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,7 +49,7 @@ public class ProgresoServlet extends HttpServlet {
 
            
                 default:
-                    page = "error.jsp";
+                    page = ERROR;
                     break;
             }
         }
@@ -70,76 +74,38 @@ public class ProgresoServlet extends HttpServlet {
 //    FOREIGN KEY (FKidLeccion) REFERENCES tbLecciones(idLeccion)
 //);
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-                       String action = request.getParameter("accion");
-    
-        String page = "index.jsp";
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String action = request.getParameter("accion");
+    String page = "index.jsp";
 
-        if (action != null) {
-            switch (action) {
-                case "agregarProgreso":
-                    System.out.println("LLEGO A POST DE AGREGAR PROGRESO");
-                        int idUsuario = Integer.parseInt(request.getParameter("FKidUsuario"));
-                              System.out.println("es:"+request.getParameter("FKidUsuario"));
-                    System.out.println("es:"+request.getParameter("FKidIdioma"));
-                    System.out.println("es:"+request.getParameter("FKidCurso"));
-                    System.out.println("es:"+request.getParameter("FKidLeccion"));
-                    System.out.println("es:"+request.getParameter("puntuacion"));
-                 String idLeccion = request.getParameter("FKidLeccion");
-                 int puntuacion = Integer.parseInt(request.getParameter("puntuacion"));
+    if ("agregarProgreso".equals(action)) {
+        int idUsuario = Integer.parseInt(request.getParameter(FK_idUsuario));
+        String idLeccion = request.getParameter(FK_idLeccion);
+        int puntuacion = Integer.parseInt(request.getParameter("puntuacion"));
+        ClsModeloDaoProgreso daoProgreso = new ClsModeloDaoProgreso();
 
-                 ClsModeloDaoProgreso daoProgreso = new ClsModeloDaoProgreso();
-
-                 // Verificar si ya existe un registro para la FKidLeccion proporcionada
-                 boolean existeProgreso = daoProgreso.existeProgresoPorIdLeccion(idLeccion, idUsuario);
-
-                 if (existeProgreso) {
-                     // Si ya existe, actualiza la fecha de progreso y la puntuación
-                     boolean actualizacionExitosa = daoProgreso.actualizarProgreso(idLeccion, puntuacion);
-
-                     if (actualizacionExitosa) {
-                         page = "app/index.jsp";
-                     } else {
-                         page = "error.jsp";
-                     }
-                 } else {
-                     // Si no existe, crea un nuevo registro de progreso
-                     ClsModeloProgreso nuevoProgreso = new ClsModeloProgreso();
-                     nuevoProgreso.setIdFKidUsuario(Integer.parseInt(request.getParameter("FKidUsuario")));
-                     nuevoProgreso.setIdFKidIdioma(Integer.parseInt(request.getParameter("FKidIdioma")));
-                     nuevoProgreso.setFKidCurso(request.getParameter("FKidCurso"));
-                     nuevoProgreso.setFKidLeccion(request.getParameter("FKidLeccion"));
-                     nuevoProgreso.setPuntuacion(puntuacion);
-                     
-                 
-                   
-                
-
-                     boolean insercionExitosa = daoProgreso.agregarProgreso(nuevoProgreso);
-
-                     if (insercionExitosa) {
-                         page = "app/index.jsp";
-                     } else {
-                         page = "error.jsp";
-                     }
-                 }
-                 break;
-
-                default:
-                    page = "error.jsp";
-                    break;
-            }
+        boolean existeProgreso = daoProgreso.existeProgresoPorIdLeccion(idLeccion, idUsuario);
+        if (existeProgreso) {
+            boolean actualizacionExitosa = daoProgreso.actualizarProgreso(idLeccion, puntuacion);
+            page = actualizacionExitosa ? "app/index.jsp" : ERROR;
+        } else {
+            ClsModeloProgreso nuevoProgreso = new ClsModeloProgreso();
+            nuevoProgreso.setIdFKidUsuario(idUsuario);
+            nuevoProgreso.setIdFKidIdioma(Integer.parseInt(request.getParameter("FKidIdioma")));
+            nuevoProgreso.setFKidCurso(request.getParameter("FKidCurso"));
+            nuevoProgreso.setFKidLeccion(idLeccion);
+            nuevoProgreso.setPuntuacion(puntuacion);
+            boolean insercionExitosa = daoProgreso.agregarProgreso(nuevoProgreso);
+            page = insercionExitosa ? "app/index.jsp" : ERROR;
         }
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
-   
-  
+    } else {
+        page = ERROR;
     }
 
-
+    RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+    dispatcher.forward(request, response);
+}
     @Override
     public String getServletInfo() {
         return "Short description";

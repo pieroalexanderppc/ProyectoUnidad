@@ -13,7 +13,12 @@ import Controlador.LoginServlet;
 public class ClsModeloDaoAdministrador {
     private final Connection conexion;
     LoginServlet loginServlet = new LoginServlet();
-    
+    public static final String nombreString = "nombre";
+    public static final String apellidoString = "apellido";
+    public static final String fechaString = "fechaNacimiento";
+    public static final String generoString = "genero";
+    public static final String ciudadString = "ciudad";
+    public static final String emailString = "email";
     public ClsModeloDaoAdministrador() {
         // Obtener la conexión a la base de datos desde ClsConexiondb
         conexion = new ClsConexiondb().obtenerConexion();
@@ -59,13 +64,13 @@ public class ClsModeloDaoAdministrador {
             while (resultSet.next()) {
                 ClsModeloAdministrador administrador = new ClsModeloAdministrador();
                 administrador.setDni(resultSet.getString("dni"));
-                administrador.setNombre(resultSet.getString("nombre"));
-                administrador.setApellido(resultSet.getString("apellido"));
-                administrador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
-                administrador.setGenero(resultSet.getString("genero"));
+                administrador.setNombre(resultSet.getString(nombreString));
+                administrador.setApellido(resultSet.getString(apellidoString));
+                administrador.setFechaNacimiento(resultSet.getString(fechaString));
+                administrador.setGenero(resultSet.getString(generoString));
                 administrador.setPais(resultSet.getString("pais"));
                 administrador.setCiudad(resultSet.getString("ciudad"));
-                administrador.setEmail(resultSet.getString("email"));
+                administrador.setEmail(resultSet.getString(emailString));
                 administrador.setTelefono(resultSet.getInt("telefono"));
                 administrador.setPasswordHash(resultSet.getString("passwordHash"));
                 administrador.setRol(resultSet.getString("rol"));
@@ -142,13 +147,13 @@ public class ClsModeloDaoAdministrador {
                 if (resultSet.next()) {
                     ClsModeloAdministrador administrador = new ClsModeloAdministrador();
                     administrador.setDni(resultSet.getString("dni"));
-                    administrador.setNombre(resultSet.getString("nombre"));
-                    administrador.setApellido(resultSet.getString("apellido"));
-                    administrador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
-                    administrador.setGenero(resultSet.getString("genero"));
+                    administrador.setNombre(resultSet.getString(nombreString));
+                    administrador.setApellido(resultSet.getString(apellidoString));
+                    administrador.setFechaNacimiento(resultSet.getString(fechaString));
+                    administrador.setGenero(resultSet.getString(generoString));
                     administrador.setPais(resultSet.getString("pais"));
                     administrador.setCiudad(resultSet.getString("ciudad"));
-                    administrador.setEmail(resultSet.getString("email"));
+                    administrador.setEmail(resultSet.getString(emailString));
                     administrador.setTelefono(resultSet.getInt("telefono"));
                     administrador.setPasswordHash(resultSet.getString("passwordHash"));
                     administrador.setRol(resultSet.getString("rol"));
@@ -175,13 +180,13 @@ public class ClsModeloDaoAdministrador {
                 if (resultSet.next()) {
                     ClsModeloAdministrador administrador = new ClsModeloAdministrador();
                     administrador.setDni(resultSet.getString("dni"));
-                    administrador.setNombre(resultSet.getString("nombre"));
-                    administrador.setApellido(resultSet.getString("apellido"));
+                    administrador.setNombre(resultSet.getString(nombreString));
+                    administrador.setApellido(resultSet.getString(apellidoString));
                     administrador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
-                    administrador.setGenero(resultSet.getString("genero"));
+                    administrador.setGenero(resultSet.getString(generoString));
                     administrador.setPais(resultSet.getString("pais"));
                     administrador.setCiudad(resultSet.getString("ciudad"));
-                    administrador.setEmail(resultSet.getString("email"));
+                    administrador.setEmail(resultSet.getString(emailString));
                     administrador.setTelefono(resultSet.getInt("telefono"));
                     administrador.setPasswordHash(resultSet.getString("passwordHash"));
                     administrador.setRol(resultSet.getString("rol"));

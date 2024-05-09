@@ -2,7 +2,7 @@
 <%@ page import="Modelo.ClsModeloCurso" %>
 <%@ page import="ModeloDAO.ClsModeloDaoCurso" %>
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Editar Curso</title>

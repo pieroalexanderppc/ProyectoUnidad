@@ -3,6 +3,7 @@
 <%@page import="Modelo.ClsModeloLeccion"%>
 <%@page import="ModeloDAO.ClsModeloDaoLeccion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="org.apache.commons.text.StringEscapeUtils"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,8 @@
             border-color: #cacaca;
         }
         .btn {
-            border-radius: 5px; /* Añadir borde redondeado a los botones */
+            border-radius: 5px; /* Añadir borde redondeado a los botoness */
+            /*Hola*/
         }
    
     </style>
@@ -96,10 +98,10 @@
                     List<ClsModeloLeccion> lecciones = dao.listarLeccionesPorCurso(idCursoStr);
                     for (ClsModeloLeccion leccion : lecciones) { %>
                     <tr>
-                        <td><%= leccion.getIdLeccion() %></td>
-                        <td><%= leccion.getFKidCurso() %></td>
-                        <td><%= leccion.getFKidIdioma() %></td>
-                        <td><%= leccion.getTitulo() %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getIdLeccion()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getFKidCurso()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getFKidIdioma()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(leccion.getTitulo()) %></td>
                         <td>
                             <img src="<%= leccion.getUrlBanner() %>" alt="Banner" width="60" >
                         </td>

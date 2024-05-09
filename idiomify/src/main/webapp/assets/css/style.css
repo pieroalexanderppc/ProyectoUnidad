@@ -760,14 +760,13 @@ border-bottom: solid 1px var(--kappel);}
 .blog-card .card-content {
   position: relative;
   margin-inline: 15px;
+  background: linear-gradient(280deg, #174B8A 3.68%, #0C1219 71.34%), linear-gradient(280deg, #174B8A 3.68%, #0C1219 71.34%);
   background-color: var(--fondo_oscuro);
   padding: 20px;
   border-radius: var(--radius-10);
   box-shadow: var(--shadow-3);
   margin-block-start: -100px;
   z-index: 1;
-  background: linear-gradient(280deg, #174B8A 3.68%, #0C1219 71.34%), linear-gradient(280deg, #174B8A 3.68%, #0C1219 71.34%);
-
 }
 
 .blog-card .card-btn {

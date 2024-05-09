@@ -1,6 +1,7 @@
 <%@page import="ModeloDAO.ClsModeloDaoConsultas"%>
 <%@page import="Modelo.ClsModeloUsuario"%>
 <%@page import="java.util.List"%>
+<%@ page import="org.apache.commons.text.StringEscapeUtils" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,14 +64,14 @@
                 %>
                     <tr>
       
-                        <td><%= usuario.getNombre() %></td>
-                        <td><%= usuario.getApellido() %></td>
-                        <td><%= usuario.getFechaNacimiento() %></td>
-                        <td><%= usuario.getGenero() %></td>
-                        <td><%= usuario.getPais() %></td>
-                        <td><%= usuario.getCiudad() %></td>
-                        <td><%= usuario.getEmail() %></td>
-                        <td><%= usuario.getFechaRegistro() %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getNombre()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getApellido()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getFechaNacimiento()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getGenero()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getPais()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getCiudad()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getEmail()) %></td>
+                        <td><%= StringEscapeUtils.escapeHtml4(usuario.getFechaRegistro()) %></td>
        
                     </tr>
                 <%
